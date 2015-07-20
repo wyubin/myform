@@ -1,0 +1,12 @@
+{
+	"name" : "myform",
+	"version" : "0.0.1",
+	"style":{
+		"myform.min.css":["myform.scss","../../lib/mytooltip.scss"],
+		"pages/demo_pkg.min.css":["myform.scss","../../lib/mytooltip.scss"]
+	},
+	"browser":{
+		"pages/demo_pkg.min.js":"pages/demo_pkg.js",
+		"myform.min.js":"myform.js"
+	}
+}

@@ -1,0 +1,41 @@
+$invalid_font_color: #f00; /* color of invalid input label */
+form.myform{
+	padding: 10px;
+	overflow:auto;
+	/* Border style */
+	border: 1px solid #ccc;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+	-moz-box-shadow: 2px 2px 2px #ccc;
+	-webkit-box-shadow: 2px 2px 2px #ccc;
+	box-shadow: 2px 2px 2px #ccc;
+	//font-family:"Courier New", Courier, monospace;
+	>div.form_input> div.field{
+		margin-bottom: 7px;
+		display: table;
+		>label{
+			text-shadow: 2px 2px 2px #ccc;
+			/* display: block; */
+			float: left;
+			font-weight: bold;
+			margin-right:10px;
+			text-align: right;
+			text-transform: capitalize;
+		};
+		>*:required + label:before{
+			content:"*";
+			color:$invalid_font_color;
+		};
+		>*:invalid + label{
+			color:$invalid_font_color;
+		};
+		>*:nth-child(1){
+			float:right;
+		}
+	};
+	>div.form_ctrl{
+		float: right;
+	}
+	// for diff kind of input
+}
