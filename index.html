@@ -1,0 +1,67 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="demo_pkg.min.css">
+</head>
+<body>
+	<main>
+		<h2>Demo page of myform</h2>
+		<h4>Try to make better on form construction and validation</h4>
+		<form id="simple_form" style="background:#f0f0f0"></form>
+		<p>Implement general elements in form and set a reasonable validation rule for better UX and input data quality and show data below</p>
+		<p id="data"></p>
+	</main>
+
+<script src="./demo_pkg.min.js"></script>
+<script>
+var i,t,doms={},view={},func={},var_o={};
+t=document.querySelectorAll('[id]');
+for(i=0;i<t.length;i++){
+	doms[t[i].id] = t[i];
+}
+var_o.os2brand = {
+	'apple':['Apple'],
+	'android':['Sony','Sumsung','HTC','ASUS','LG'],
+	'windows mobile':['Nokia','HTC'],
+	'firefox':['Alcatel','ZTE','LG']
+}
+// functions
+
+// html events
+
+window.onload = function(){
+	// generate form
+	view.form = new demo_pkg.myform(doms.simple_form);
+	view.form.add_inputs([
+		{name:'input',attr:{name:'name',required:'required',type:'text',size:50,title:'Your name'}},
+		{name:'input',attr:{name:'age',type:'number',title:'your age, but only accept valid age from 13',min:13,max:100,required:'required'}},
+		{name:'input',attr:{name:'email',type:'text',size:50,title:'email for recall',type:'email'}},
+		{name:'div',attr:{name:'phone_os',title:'select your favorate phone os'},
+			child:['apple','android','windows mobile','firefox'].reduce(function(a,b){return a.concat([{name:'input',attr:{type:'radio',value:b,name:'phone_os',required:'required'}},'I love '+b,{name:'br'}])},[])},
+		{name:'select',attr:{name:'phone_brand',title:'I like...',multiple:'multiple'}},
+		{name:'input',attr:{name:'color',title:'change the form background',type:'color',value:'#f0f0f0'}},
+		{name:'div',attr:{name:'interests',title:'check activities you like'},
+			child:['programming','reading','play video games','sport','sleep','eating'].reduce(function(a,b){
+				return a.concat([{name:'input',attr:{type:'checkbox',name:'interests',value:b}},b])
+			},[])
+		},
+		{name:'textarea',attr:{name:'messages',title:'Write your thought',cols:60,rows:5}},
+		{name:'input',attr:{name:'files',type:'file'}}
+	]);
+	// add event binding function
+	view.form.e_reg.events.change['[name=phone_os]'] = function(e){
+		e.currentTarget['phone_brand'].innerHTML='';
+		e.currentTarget['phone_brand'].append_by_array(var_o.os2brand[e.target.value].map(
+			function(v){return {name:'option',attr:{value:v},child:[v]}}
+		));
+	}
+	view.form.e_reg.events.change['[name=color]'] = function(e){
+		e.currentTarget.style.background = e.target.value;
+	}
+	view.form.submit_callback = function(e){
+		doms.data.innerHTML = JSON.stringify(e.target.val());
+	}
+}
+</script>
+</body>
+</html>
