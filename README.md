@@ -29,6 +29,10 @@ form_view.add_inputs([
 ```
 
 ## Change logs
+* 0.0.2
+
+	Revised Safari bugs (no implement radionodelist object)
+
 * 0.0.1
 
 	Initiate the project and a base function
