@@ -1,12 +1,28 @@
 {
-	"name" : "myform",
-	"version" : "0.0.1",
-	"style":{
-		"myform.min.css":["myform.scss","../../lib/mytooltip.scss"],
-		"pages/demo_pkg.min.css":["myform.scss","../../lib/mytooltip.scss"]
-	},
-	"browser":{
-		"pages/demo_pkg.min.js":"pages/demo_pkg.js",
-		"myform.min.js":"myform.js"
-	}
+  "name": "myform",
+  "version": "1.0.0",
+  "description": "A Compact form generator. Design a good api to insert form elements by json object. A straightforward Css design, so each item can align better by name and input area, also label a necessary mark when the information is needed. Revise Safari's problem that do not block submit when needed information is not filled by a home-made tooltip. Also, revise checkbox and select associated DOM to get their value correctly.",
+  "main": "myform.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wyubin/myform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wyubin/myform/issues"
+  },
+  "homepage": "https://github.com/wyubin/myform#readme",
+  "style":{
+	  "myform.min.css":["myform.scss","../../lib/mytooltip.scss"],
+	  "pages/demo_pkg.min.css":["myform.scss","../../lib/mytooltip.scss"]
+  },
+  "browser":{
+	  "pages/demo_pkg.min.js":"pages/demo_pkg.js",
+	  "myform.min.js":"myform.js"
+  }
 }
