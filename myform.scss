@@ -10,10 +10,16 @@ form.myform{
 	-moz-box-shadow: 2px 2px 2px #ccc;
 	-webkit-box-shadow: 2px 2px 2px #ccc;
 	box-shadow: 2px 2px 2px #ccc;
+	&.hide{
+		display:none;
+	};
 	//font-family:"Courier New", Courier, monospace;
 	>div.form_input> div.field{
 		margin-bottom: 7px;
 		display: table;
+		&.hide{
+			display:none;
+		};
 		>label{
 			text-shadow: 2px 2px 2px #ccc;
 			/* display: block; */

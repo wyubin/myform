@@ -1,0 +1,98 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="demo_pkg.min.css">
+</head>
+<body>
+	<main>
+		<h2>Demo page of myform</h2>
+		<h4>A Demo to show how to work with a json loading and change events</h4>
+		<form id="simple_form" style="background:#f0f0f0"></form>
+		<p>Implement general elements in form and set a reasonable validation rule for better UX and input data quality and show data below</p>
+		<p id="data"></p>
+	</main>
+
+<script src="./demo_pkg.min.js"></script>
+<script>
+var i,t,doms={},view={},func={},var_o={};
+t=document.querySelectorAll('[id]');
+for(i=0;i<t.length;i++){
+	doms[t[i].id] = t[i];
+}
+// functions
+func.db2rpog = function(dom){
+	var db_type = var_o.form_data.db_info.types[var_o.form_data.db_info.names.indexOf(dom.value)];
+	var progs = var_o.form_data.base_info.dbtype2prog[db_type];
+	dom.form['prog'].innerHTML='';
+	dom.form['prog'].append_by_array(progs.map(function(v){
+		return {
+			name:"option",
+			attr:{value:v},
+			child:[var_o.form_data.base_info.prog2des[v]]
+			};
+	}));
+	return dom.form['prog'];
+}
+func.prog2args = function(dom){
+	var prog = dom.value;
+	var args = var_o.form_data.base_info.args;
+	return Object.keys(args).map(function(v){
+		var t_arg = args[v][prog] || args[v]['other'];
+		dom.form[v].innerHTML='';
+		if(t_arg){
+			dom.form[v].append_by_array(t_arg.map(function(v_1){
+				return {
+					name:"option",
+					attr:{value:v_1},
+					child:[v_1]
+				};
+			}));
+		}
+		return dom.form[v];
+	});
+}
+// html events
+
+window.onload = function(){
+	// generate form
+	view.form = new demo_pkg.myform(doms.simple_form);
+	// add event binding function
+	view.form.e_reg.events.click = {};
+	view.form.e_reg.events.change['[name=db]']=function(e){func.prog2args(func.db2rpog(e.target))};
+	view.form.e_reg.events.change['[name=prog]']=function(e){func.prog2args(e.target)};
+	view.form.submit_callback = function(e){
+		doms.data.innerHTML = JSON.stringify(e.target.val());
+	}
+	view.form.e_reg.events.click['[name=ad_btn]']=function(e){
+		Object.keys(var_o.form_data.base_info.args).map(function(v){
+			doms.simple_form[v].parentElement.classList.toggle('hide');
+		});
+	}
+	// set validators
+	doms.simple_form.validators.fa = function(e){
+		var seq_o = demo_pkg.fasta.parse(e.target.value);
+		if('_error' in seq_o){
+			return seq_o.msg;
+		}else{
+			return '';
+		}
+	}
+	demo_pkg.my_ajax.get('blast.min.json',{success:function(data){
+		var_o.form_data = JSON.parse(data);
+		view.form.add_inputs(var_o.form_data.dom_json);
+		// set dbs
+		doms.simple_form.db.append_by_array(var_o.form_data.db_info.names.map(function(v,ind){
+			return {
+				name:"option",
+				attr:{value:v},
+				child:[var_o.form_data.db_info.titles[ind]]
+				};
+		}));
+		// trigger init state
+		func.prog2args(func.db2rpog(doms.simple_form.db));
+	}});
+
+}
+</script>
+</body>
+</html>

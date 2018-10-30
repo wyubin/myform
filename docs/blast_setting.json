@@ -1,0 +1,7 @@
+{
+	"db_info":{
+		"names":["contig","orf"],
+		"types":["dna","prot"],
+		"titles":["Total assembly sequences","translated protein sequences"]
+	}
+}

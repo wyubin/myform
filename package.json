@@ -24,5 +24,9 @@
   "browser":{
 	  "pages/demo_pkg.min.js":"pages/demo_pkg.js",
 	  "myform.min.js":"myform.js"
+  },
+  "dependencies": {
+		"jsStdlib": "wyubin/jsStdlib",
+		"spa_tools": "wyubin/spa_tools"
   }
 }

@@ -1,13 +1,13 @@
 "use strict"
 module.id='myform';
 // general object extend
-require('../../lib/stdlib.HTMLElement.js');
-require('../../lib/stdlib.HTMLFormElement.js');
-require('../../lib/stdlib.Navigator.js');
-require('../../lib/stdlib.CSSStyleSheet.js');
-require('../../lib/stdlib.FileList.js');
+require('jsStdlib/stdlib.HTMLElement.js');
+require('jsStdlib/stdlib.HTMLFormElement.js');
+require('jsStdlib/stdlib.Navigator.js');
+require('jsStdlib/stdlib.CSSStyleSheet.js');
+require('jsStdlib/stdlib.FileList.js');
 var extend = require('util')._extend;
-var events_reg = require('../../lib/events_reg.js');
+var events_reg = require('spa_tools/events_reg.js');
 
 /**
 * create(new) form view without jquery with simple attr and reset, submit functions.
